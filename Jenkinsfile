@@ -4,16 +4,15 @@ pipeline {
 
     tools {
 
-        maven "MAVEN"
+        maven "maven"
     }
 
     
     stages {
         stage('Build Maven') {
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'GIT_REPO', url: 'https://github.com/devopshint/jenkins-maven.git']]])
-
-                sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/dileep1209/Demo.git']])
+                sh "mvn clean package"
                 
             }
         }
